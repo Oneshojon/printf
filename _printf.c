@@ -9,7 +9,7 @@ void print_string(char *str)
 {
 	int len = 0;
 
-	while (*str)
+	while (str[len] != '\0')
 	{
 		len++;
 	}
@@ -25,7 +25,7 @@ int count_string(char *s)
 {
 	int count = 0;
 
-	while (*s)
+	while (s[count] != '\0')
 	{
 		count++;
 		s++;
@@ -42,14 +42,14 @@ int count_string(char *s)
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int char_count;
-	char c;
-	
+	int char_count = 0;
+	char c, *s;
 
+	if (format == NULL)
+		return (-1);
 	va_start(args, format);
-	while (*format != '\0')
+	while (*format)
 	{
-		char_count = 0;
 		if (*format == '%')
 		{
 			format++;
@@ -57,8 +57,9 @@ int _printf(const char *format, ...)
 				break;
 			if (*format == 's')
 			{
-				print_string(va_arg(args, char*));
-				char_count += count_string(va_arg(args, char*));
+				s = va_arg(args, char*);
+				print_string(s);
+				char_count += count_string(s);
 			}
 			else if (*format == 'c')
 			{
