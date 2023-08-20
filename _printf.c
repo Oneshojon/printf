@@ -1,4 +1,37 @@
 #include "main.h"
+/**
+ *print_string - prints strings and return the count
+ *@str: pointer to the string
+ *
+ *Return: pointer to the string
+ */
+void print_string(char *str)
+{
+	int len = 0;
+
+	while (*str)
+	{
+		len++;
+	}
+	write(1, str, len);
+}
+/**
+ *count_string - counts the number of character in a string
+ *@s: pointer to the string
+ *
+ *Return: counts
+ */
+int count_string(char *s)
+{
+	int count = 0;
+
+	while (*s)
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
 
 /**
  *_printf - produces output according to a format
@@ -9,15 +42,14 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i;
+	int char_count;
 	char c;
-	char *s;
-	int char_count = 0;
-	int len = 0;
+	
 
 	va_start(args, format);
 	while (*format != '\0')
 	{
+		char_count = 0;
 		if (*format == '%')
 		{
 			format++;
@@ -25,14 +57,8 @@ int _printf(const char *format, ...)
 				break;
 			if (*format == 's')
 			{
-				s = va_arg(args, char*);
-				while (*s)
-				{
-					len++;
-					s++;
-				}
-				write(1, s, len);
-				char_count+= len;
+				print_string(va_arg(args, char*));
+				char_count += count_string(va_arg(args, char*));
 			}
 			else if (*format == 'c')
 			{
