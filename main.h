@@ -5,5 +5,6 @@
 int _printf(const char *format, ...);
 int count_string(char *s);
 void print_string(char *str);
-
+int count_bin(unsigned int num);
+void printer_ui_bin(unsigned int num);
 #endif

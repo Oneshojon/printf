@@ -11,9 +11,9 @@ int _printf(const char *format, ...)
 	int char_count = 0;
 
 	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && !format[1]))
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
+	if (format[0] == '%' && format[1] == ' ')
 		return (-1);
 	while (*format)
 	{
@@ -37,6 +37,13 @@ int _printf(const char *format, ...)
 				write(1, &c, 1);
 				char_count++;
 			}
+			else if (*format == 'b')
+			{
+				unsigned int num = va_arg(args, unsigned int);
+
+				printer_ui_bin(num);
+				char_count += count_bin(num);
+			}
 			else if (*format == '%')
 			{
 				write(1, format, 1);
@@ -52,4 +59,54 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 	return (char_count);
+}
+/**
+ *printer_ui_bin - prints the int in decimal
+ *@num: the integer
+ *
+ *return: Nothin
+ */
+void printer_ui_bin(unsigned int num)
+{
+	int  i;
+	char digit;
+	char binary_digits[32];
+	int index = 0;
+
+	if (num == 0)
+	{
+		write(1, "0", 1);
+	}
+	else
+	{
+		while (num > 0)
+		{
+			binary_digits[index] = (num % 2) + '0';
+			num /= 2;
+			index++;
+		}
+		for (i = index; i>=0; i--)
+		{
+			write(1, &binary_digits[i], 1);
+		}
+	}
+}
+/**
+ *count_bin - counts the length of the binary number
+ *@num: recieves ui
+ *
+ *Return: counts
+ */
+int count_bin(unsigned int num)
+{
+	int c = 0;
+
+	if (num == 0)
+		return (1);
+	while (num > 0)
+	{
+		num /= 2;
+		c++;
+	}
+	return (c);
 }
