@@ -50,8 +50,6 @@ int _printf(const char *format, ...)
 		}
 		format++;
 	}
-	char n = '\0';
-	write(1, &n, 1);
 	va_end(args);
 	return (char_count);
 }
