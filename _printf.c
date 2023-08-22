@@ -26,6 +26,8 @@ int _printf(const char *format, ...)
 				char *str = va_arg(args, char*);
 				int len = 0;
 
+				if (str == NULL)
+					str = "(null)";
 				while (str[len] != '\0')
 					len++;
 				write(1, str, len);
