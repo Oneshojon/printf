@@ -11,6 +11,7 @@ int _printf(const char *format, ...)
 	int char_count = 0;
 
 	va_start(args, format);
+
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
@@ -84,7 +85,6 @@ int _printf(const char *format, ...)
 void printer_ui_bin(unsigned int num)
 {
 	int  i;
-	char digit;
 	char binary_digits[32];
 	int index = 0;
 
