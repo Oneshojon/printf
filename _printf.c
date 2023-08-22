@@ -100,7 +100,7 @@ void printer_ui_bin(unsigned int num)
 			num /= 2;
 			index++;
 		}
-		for (i = index; i>=0; i--)
+		for (i = index; i >= 0; i--)
 		{
 			write(1, &binary_digits[i], 1);
 		}
