@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	if (format[0] == '%' && format[1] == ' ')
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 	while (*format)
 	{
@@ -43,6 +43,21 @@ int _printf(const char *format, ...)
 
 				printer_ui_bin(num);
 				char_count += count_bin(num);
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				int num = va_arg(args, int);
+				int len = count_digits(num);
+
+				if (num < 0)
+				{
+					write(1, "-", 1);
+					char_count++;
+					num = -num;
+					len--;
+				}
+				printer_dec_int(num);
+				char_count += len;
 			}
 			else if (*format == '%')
 			{
