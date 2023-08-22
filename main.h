@@ -7,4 +7,7 @@ int count_string(char *s);
 void print_string(char *str);
 int count_bin(unsigned int num);
 void printer_ui_bin(unsigned int num);
+void printer_dec_int(int num);
+int count_digits(int num);
+
 #endif
