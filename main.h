@@ -9,5 +9,6 @@ int count_bin(unsigned int num);
 void printer_ui_bin(unsigned int num);
 void printer_dec_int(int num);
 int count_digits(int num);
+void printer_dec_int_rec(int num);
 
 #endif
