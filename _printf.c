@@ -72,6 +72,24 @@ int _printf(const char *format, ...)
 	return (char_count);
 }
 /**
+ *print_ui_bin_rec - prints binary recursively
+ *@num: provided number
+ *
+ *Return: nothing
+ */
+void print_ui_bin_rec(unsigned int num)
+{
+	char bin;
+
+	if (num > 0)
+	{
+		print_ui_bin_rec(num / 2);
+		bin = (num % 2) + '0';
+		write(1, &bin, 1);
+	}
+}
+
+/**
  *printer_ui_bin - prints the int in decimal
  *@num: the integer
  *
@@ -79,15 +97,12 @@ int _printf(const char *format, ...)
  */
 void printer_ui_bin(unsigned int num)
 {
-	int bin;
-
 	if (num == 0)
 	{
 		write(1, "0", 1);
 	}
-	printer_ui_bin(num / 2);
-	bin = num % 2 + '0';
-	write(1, &bin, 1);
+	else
+		printer_ui_bin_rec(num)
 }
 /**
  *count_bin - counts the length of the binary number
