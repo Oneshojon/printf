@@ -102,7 +102,7 @@ void printer_ui_bin(unsigned int num)
 		write(1, "0", 1);
 	}
 	else
-		printer_ui_bin_rec(num)
+		print_ui_bin_rec(num);
 }
 /**
  *count_bin - counts the length of the binary number
