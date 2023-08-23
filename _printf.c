@@ -79,27 +79,15 @@ int _printf(const char *format, ...)
  */
 void printer_ui_bin(unsigned int num)
 {
-	int  i;
-	char binary_digits[32];
-	int index = 0;
+	int bin;
 
 	if (num == 0)
 	{
 		write(1, "0", 1);
 	}
-	else
-	{
-		while (num > 0)
-		{
-			binary_digits[index] = (num % 2) + '0';
-			num /= 2;
-			index++;
-		}
-		for (i = index; i >= 0; i--)
-		{
-			write(1, &binary_digits[i], 1);
-		}
-	}
+	printer_ui_bin(num / 2);
+	bin = num % 2 + '0';
+	write(1, &bin, 1);
 }
 /**
  *count_bin - counts the length of the binary number
