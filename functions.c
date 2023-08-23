@@ -1,4 +1,20 @@
 #include "main.h"
+/**
+ *printer_dec_in_rec - prints degits in rucursive 
+ *@num: The recieved number
+ *
+ *Return: Nothing
+ */
+void printer_dec_int_rec(int num)
+{
+	int digits;
+
+	if (num == 0)
+		return;
+	printer_dec_int_rec(num / 10);
+	digits = num % 10 + '0';
+	write(1, &digits, 1);
+}
 
 /**
  *printer_dec_int - prints the number
@@ -8,10 +24,6 @@
  */
 void printer_dec_int(int num)
 {
-	int digits[10];/*max digits in an int*/
-	int index = 0;
-	int i;
-
 	if (num == 0)
 	{
 		write(1, "0", 1);
@@ -21,18 +33,10 @@ void printer_dec_int(int num)
 		if (num < 0)
 		{
 			write(1, "-", 1);
-			num = -num;
+			printer_dec_int_rec(-num);
 		}
-		while (num > 0)
-		{
-			digits[index] = num % 10 + '0';
-			index++;
-			num /= 10;
-		}
-		for (i = index; i >= 0; i--)
-		{
-			write(1, &digits[i], 1);
-		}
+		else
+			printer_dec_int_rec(num);
 	}
 }
 /**
@@ -56,7 +60,8 @@ int count_digits(int num)
 	}
 	if (temp_num < 0)
 		return (count + 1);
-	return (count);
+	else
+		return (count);
 }
 /**
  *is_digit - checks if a chracter is a number
