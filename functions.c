@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- *printer_dec_in_rec - prints degits in rucursive 
+ *printer_dec_int_rec - prints degits in rucursive
  *@num: The recieved number
  *
  *Return: Nothing
