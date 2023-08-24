@@ -59,7 +59,34 @@ int _printf(const char *format, ...)
 				printer_dec_int(num);
 				char_count += count_digits(num);
 			}
+			else if (*format == 'x')
+			{
+				int num = va_arg(args, int);
 
+				print_x(num);
+				char_count += count_x(num);
+			}
+			else if (*format == 'X')
+			{
+				int num = va_arg(args, int);
+
+				print_X(num);
+				char_count += count_X(num);
+			}
+			else if (*format == 'o')
+			{
+				int num = va_arg(args, int);
+
+				print_octal_num(num);
+				char_count += count_octal_digits(num);
+			}
+			else if (*format == 'u')
+			{
+				unsigned int num = va_arg(args, unsigned int);
+
+				print_unsigned_dec(num);
+				char_count += count_unsigned_dec(num);
+			}
 		}
 		else
 		{
